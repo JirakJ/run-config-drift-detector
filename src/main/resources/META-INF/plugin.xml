@@ -1,0 +1,77 @@
+<idea-plugin>
+    <id>com.jakubjirak.runconfigdrift</id>
+    <name>Run Config Drift Detector</name>
+    <vendor email="jakub@jirak.dev" url="https://github.com/jakubjirak">Jakub Jirák</vendor>
+
+    <description><![CDATA[
+    <h2>Run Config Drift Detector</h2>
+    <p>Detects "drift" between what your project needs to run and what's actually configured.
+    Catches missing environment variables, JDK version mismatches, wrong working directories,
+    and port conflicts before they cause runtime failures.</p>
+
+    <h3>Features</h3>
+    <ul>
+        <li><b>Health report dashboard</b> — see all drift issues at a glance with a health score</li>
+        <li><b>Requirements manifest</b> — declare project needs in <code>.run-requirements.yaml</code></li>
+        <li><b>JDK validation</b> — checks project SDK version against requirements</li>
+        <li><b>Environment variable check</b> — verifies required env vars are set in run configs</li>
+        <li><b>Working directory validation</b> — ensures correct working directory</li>
+        <li><b>Fix suggestions</b> — actionable recommendations for each drift issue</li>
+    </ul>
+
+    <h3>Getting Started</h3>
+    <p>Create a <code>.run-requirements.yaml</code> file in your project root:</p>
+    <pre>
+    jdk: 17
+    env_vars:
+      - DATABASE_URL
+      - API_KEY
+    ports:
+      - 8080
+    working_dir: "."
+    </pre>
+    ]]></description>
+
+    <depends>com.intellij.modules.platform</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <!-- Tool window -->
+        <toolWindow
+                id="Drift Report"
+                anchor="bottom"
+                secondary="true"
+                factoryClass="com.jakubjirak.runconfigdrift.ui.DriftToolWindowFactory"
+                icon="AllIcons.General.InspectionsEye"/>
+
+        <!-- Settings page -->
+        <applicationConfigurable
+                id="com.jakubjirak.runconfigdrift.settings"
+                parentId="tools"
+                displayName="Run Config Drift Detector"
+                instance="com.jakubjirak.runconfigdrift.settings.DriftDetectorConfigurable"/>
+
+        <!-- Persistent settings -->
+        <applicationService
+                serviceImplementation="com.jakubjirak.runconfigdrift.settings.DriftDetectorSettings"/>
+
+        <!-- Notification group -->
+        <notificationGroup
+                id="Run Config Drift Detector"
+                displayType="BALLOON"
+                toolWindowId="Drift Report"/>
+
+        <!-- Startup activity -->
+        <postStartupActivity
+                implementation="com.jakubjirak.runconfigdrift.DriftDetectorStartupActivity"/>
+    </extensions>
+
+    <actions>
+        <action id="com.jakubjirak.runconfigdrift.RescanAction"
+                class="com.jakubjirak.runconfigdrift.ui.RescanDriftAction"
+                text="Re-scan for Drift"
+                description="Re-run drift detection analysis"
+                icon="AllIcons.Actions.Refresh">
+            <add-to-group group-id="ToolsMenu" anchor="last"/>
+        </action>
+    </actions>
+</idea-plugin>
