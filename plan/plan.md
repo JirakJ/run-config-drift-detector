@@ -245,6 +245,40 @@
 - [ ] Marketplace listing
 - [ ] Git tag `v2026.2.1`
 
+## Fáze 13: Git Enhancement — Config Versioning
+
+- [ ] `ConfigChangeWatcher.kt` — VFS listener na `.idea/runConfigurations/`
+- [ ] `ConfigAutoCommitter.kt` — automatický `git add` + `git commit` přes Git4Idea API
+- [ ] `ConfigHistoryService.kt` — `git log -- .idea/runConfigurations/{file}` wrapper
+- [ ] `ConfigRollbackAction.kt` — `git checkout {hash} -- {file}` pro rollback
+- [ ] `ConfigVersion.kt`, `ConfigChangeType.kt`, `ConfigVersionHistory.kt` — datový model
+- [ ] Konfigurovatelný commit message template: `chore(run-config): update {configName}`
+- [ ] Auto-commit vs. prompt mód (výchozí: prompt)
+- [ ] Unit testy pro change detection a history parsing
+
+## Fáze 14: Git Enhancement — Team Config Sync via Git
+
+- [ ] `GitIgnoreAnalyzer.kt` — parsování `.gitignore`, detekce run config tracking
+- [ ] `ConfigSyncService.kt` — monitoring `git pull` events, diff detection
+- [ ] `ConfigMergeResolver.kt` — custom merge handler pro run config XML
+- [ ] `ConfigSharingAction.kt` — toggle shared/personal s `.gitignore` update
+- [ ] `SharedConfigStatus.kt`, `SharingMode.kt`, `SyncStatus.kt` — datový model
+- [ ] Notifikace při `git pull` o nových/změněných konfiguracích
+- [ ] Diff viewer pro porovnání lokální vs. remote konfigurace
+- [ ] Unit testy pro gitignore analýzu a sync detection
+
+## Fáze 15: Git Enhancement — Branch-Specific Configs
+
+- [ ] `BranchChangeListener.kt` — Git4Idea `GitRepositoryChangeListener` pro checkout event
+- [ ] `BranchConfigResolver.kt` — pattern matching branch name → config set
+- [ ] `ConfigOverlayEngine.kt` — XML merge: base config + branch overrides
+- [ ] `BranchConfigStatusBarWidget.kt` — status bar zobrazení aktuálního mappingu
+- [ ] `BranchConfigMapping.kt`, `BranchConfigOverride.kt`, `BranchConfigSnapshot.kt` — datový model
+- [ ] Auto-switch konfigurace při `git checkout` (<2s latence)
+- [ ] Snapshot: uložení aktuální config sady jako branch preset
+- [ ] Fallback: default sada pokud branch nemá mapping
+- [ ] Unit testy pro pattern matching a overlay engine
+
 ---
 
 ## Budoucí fáze (Paid)
