@@ -62,7 +62,7 @@
                 toolWindowId="Drift Report"/>
 
         <!-- Startup activity -->
-        <postStartupActivity
+        <projectActivity
                 implementation="com.jakubjirak.runconfigdrift.DriftDetectorStartupActivity"/>
     </extensions>
 
