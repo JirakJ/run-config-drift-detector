@@ -1,69 +1,40 @@
 package com.jakubjirak.runconfigdrift.settings
 
-import com.intellij.openapi.options.Configurable
-import com.intellij.ui.components.JBCheckBox
-import com.intellij.ui.components.JBLabel
-import com.intellij.ui.components.JBTextField
-import com.intellij.util.ui.FormBuilder
-import javax.swing.JComponent
-import javax.swing.JPanel
+import com.intellij.openapi.fileChooser.FileChooserDescriptorFactory
+import com.intellij.openapi.options.BoundConfigurable
+import com.intellij.ui.dsl.builder.*
 
 /**
  * Settings UI for Run Config Drift Detector under Tools menu.
  */
-class DriftDetectorConfigurable : Configurable {
+class DriftDetectorConfigurable : BoundConfigurable("Run Config Drift Detector") {
 
-    private var enabledCheckBox: JBCheckBox? = null
-    private var specFilePathField: JBTextField? = null
-    private var autoScanCheckBox: JBCheckBox? = null
-    private var mainPanel: JPanel? = null
-
-    override fun getDisplayName(): String = "Run Config Drift Detector"
-
-    override fun createComponent(): JComponent {
+    override fun createPanel() = panel {
         val settings = DriftDetectorSettings.getInstance()
 
-        enabledCheckBox = JBCheckBox("Enable drift detection", settings.enabled)
-        specFilePathField = JBTextField(settings.specFilePath)
-        autoScanCheckBox = JBCheckBox("Auto-scan on project open", settings.autoScanOnStartup)
+        group("General") {
+            row {
+                checkBox("Enable drift detection")
+                    .bindSelected(settings::enabled)
+                    .comment("When enabled, the plugin will detect drift between run configurations and the spec file.")
+            }
+            row {
+                checkBox("Auto-scan on project open")
+                    .bindSelected(settings::autoScanOnStartup)
+                    .comment("Automatically scan for configuration drift when a project is opened.")
+            }
+        }
 
-        mainPanel = FormBuilder.createFormBuilder()
-            .addComponent(enabledCheckBox!!)
-            .addVerticalGap(10)
-            .addLabeledComponent(JBLabel("Requirements file path:"), specFilePathField!!)
-            .addVerticalGap(10)
-            .addComponent(autoScanCheckBox!!)
-            .addComponentFillVertically(JPanel(), 0)
-            .panel
-
-        return mainPanel!!
-    }
-
-    override fun isModified(): Boolean {
-        val settings = DriftDetectorSettings.getInstance()
-        return enabledCheckBox?.isSelected != settings.enabled ||
-            specFilePathField?.text != settings.specFilePath ||
-            autoScanCheckBox?.isSelected != settings.autoScanOnStartup
-    }
-
-    override fun apply() {
-        val settings = DriftDetectorSettings.getInstance()
-        settings.enabled = enabledCheckBox?.isSelected ?: true
-        settings.specFilePath = specFilePathField?.text ?: ".run-requirements.yaml"
-        settings.autoScanOnStartup = autoScanCheckBox?.isSelected ?: true
-    }
-
-    override fun reset() {
-        val settings = DriftDetectorSettings.getInstance()
-        enabledCheckBox?.isSelected = settings.enabled
-        specFilePathField?.text = settings.specFilePath
-        autoScanCheckBox?.isSelected = settings.autoScanOnStartup
-    }
-
-    override fun disposeUIResources() {
-        enabledCheckBox = null
-        specFilePathField = null
-        autoScanCheckBox = null
-        mainPanel = null
+        group("Configuration") {
+            row("Requirements file path:") {
+                textFieldWithBrowseButton(
+                    FileChooserDescriptorFactory.createSingleFileDescriptor()
+                        .withTitle("Select Requirements File")
+                )
+                    .bindText(settings::specFilePath)
+                    .align(Align.FILL)
+                    .comment("Path to the YAML file that defines expected run configuration requirements (e.g. .run-requirements.yaml).")
+            }
+        }
     }
 }
