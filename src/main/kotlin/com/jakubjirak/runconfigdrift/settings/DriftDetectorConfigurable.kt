@@ -2,6 +2,7 @@ package com.jakubjirak.runconfigdrift.settings
 
 import com.intellij.openapi.fileChooser.FileChooserDescriptorFactory
 import com.intellij.openapi.options.BoundConfigurable
+import com.intellij.openapi.ui.TextFieldWithBrowseButton
 import com.intellij.ui.dsl.builder.*
 
 /**
@@ -27,10 +28,10 @@ class DriftDetectorConfigurable : BoundConfigurable("Run Config Drift Detector")
 
         group("Configuration") {
             row("Requirements file path:") {
-                textFieldWithBrowseButton(
-                    FileChooserDescriptorFactory.createSingleFileDescriptor()
-                        .withTitle("Select Requirements File")
-                )
+                cell(TextFieldWithBrowseButton().apply {
+                    addBrowseFolderListener("Select Requirements File", null, null,
+                        FileChooserDescriptorFactory.createSingleFileNoJarsDescriptor())
+                })
                     .bindText(settings::specFilePath)
                     .align(Align.FILL)
                     .comment("Path to the YAML file that defines expected run configuration requirements (e.g. .run-requirements.yaml).")
