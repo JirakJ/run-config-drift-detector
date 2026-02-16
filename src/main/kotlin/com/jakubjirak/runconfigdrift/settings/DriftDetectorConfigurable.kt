@@ -29,8 +29,10 @@ class DriftDetectorConfigurable : BoundConfigurable("Run Config Drift Detector")
         group("Configuration") {
             row("Requirements file path:") {
                 cell(TextFieldWithBrowseButton().apply {
-                    addBrowseFolderListener("Select Requirements File", null, null,
-                        FileChooserDescriptorFactory.createSingleFileNoJarsDescriptor())
+                    addBrowseFolderListener(
+                        com.intellij.openapi.ui.TextBrowseFolderListener(
+                            FileChooserDescriptorFactory.createSingleFileNoJarsDescriptor()
+                                .withTitle("Select Requirements File"), null))
                 })
                     .bindText(settings::specFilePath)
                     .align(Align.FILL)
