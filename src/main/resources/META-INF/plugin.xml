@@ -2,39 +2,60 @@
     <id>com.jakubjirak.runconfigdrift</id>
     <product-descriptor code="PRUNCONFIGDRIFT" release-date="20260215" release-version="20262" optional="true"/>
     <name>Run Config Drift Detector</name>
-    <vendor email="jakub@jirak.dev" url="https://github.com/jakubjirak">Jakub Jirák</vendor>
+    <vendor email="support@jakubjirak.com" url="https://github.com/jakubjirak">Jakub Jirák</vendor>
 
     <description><![CDATA[
-<h2>Run Config Drift Detector</h2>
+<h2>Run Config Drift Detector — Eliminate "Works on My Machine"</h2>
+
 <p>
-  "It works on my machine" often starts with a drifted run configuration. Run Config Drift Detector
-  compares your IDE run configurations against a <code>.run-requirements.yaml</code> manifest, catching
-  JDK mismatches, missing environment variables, and incorrect working directories before they cause
-  mysterious failures.
+  Run Config Drift Detector compares your IDE run configurations against a
+  <code>.run-requirements.yaml</code> manifest, catching JDK mismatches, missing
+  environment variables, and incorrect settings before they cause mysterious failures.
 </p>
 
-<h2>Key Features</h2>
+<h3>Environment Validation</h3>
 <ul>
-  <li><b>Health Report Dashboard</b> — Per-configuration drift score with detailed findings</li>
-  <li><b>Requirements Manifest</b> — Define expected settings in <code>.run-requirements.yaml</code></li>
-  <li><b>JDK Validation</b> — Verifies JDK version and vendor match project requirements</li>
-  <li><b>Environment Variable Checks</b> — Ensures required env vars are present with correct values</li>
-  <li><b>Working Directory Validation</b> — Confirms paths resolve correctly</li>
-  <li><b>Quick Fixes</b> — One-click corrections for detected drift</li>
+  <li><b>JDK Validation</b> — Verify JDK version and vendor match project requirements</li>
+  <li><b>Environment Variable Checks</b> — Ensure required env vars are present with correct values</li>
+  <li><b>Working Directory Validation</b> — Confirm paths resolve correctly</li>
+  <li><b>Port Conflict Detection</b> — Detect ports already in use before running your application</li>
 </ul>
 
-<h2>Why Run Config Drift Detector?</h2>
-<p>
-  Run configuration drift is a hidden source of "works on my machine" bugs. This plugin makes
-  configurations declarative and verifiable, especially valuable for onboarding new team members.
-</p>
-
-<h2>Free vs Pro</h2>
+<h3>Drift Reporting</h3>
 <ul>
-  <li><b>Free:</b> Full drift detection, health reports, requirements manifest, quick fixes</li>
-  <li><b>Pro:</b> Team config synchronization, drift notifications, CI/CD manifest validation, configuration history tracking, and multi-module project support</li>
+  <li><b>Health Check Dashboard</b> — Visual drift report with pass, fail, and warning indicators</li>
+  <li><b>Quick-Fix Suggestions</b> — One-click corrections for every detected drift issue</li>
+  <li><b>Auto-Scan on Startup</b> — Automatic validation when the project opens</li>
+  <li><b>Manual Re-Scan</b> — Trigger a scan anytime from the Tools menu</li>
 </ul>
-]]></description>
+
+<h3>Team Features (Pro/Team)</h3>
+<ul>
+  <li><b>Auto-Generate Manifest</b> — Create .run-requirements.yaml from existing run configurations</li>
+  <li><b>Team Config Sync</b> — Share and synchronize run configurations across your team</li>
+  <li><b>Onboarding Mode</b> — Guide new team members through environment setup</li>
+  <li><b>Common Issues Dashboard</b> — See the most frequent drift issues across the team</li>
+</ul>
+
+<h3>Pricing</h3>
+<ul>
+  <li><b>Free</b> — Full drift detection (up to 10 requirements), health reports, quick fixes</li>
+  <li><b>Pro ($2.90/month or $29/year)</b> — Unlimited requirements, auto-generate manifest, onboarding mode</li>
+  <li><b>Team ($5.90/user/month)</b> — All Pro features + team sync, common issues dashboard, .env.example sync</li>
+</ul>
+
+<h3>Requirements</h3>
+<ul>
+  <li>IntelliJ IDEA, PyCharm, WebStorm, or compatible JetBrains IDE (2024.1+)</li>
+  <li>A <code>.run-requirements.yaml</code> file in your project root</li>
+</ul>
+
+<h3>Support</h3>
+<ul>
+  <li>Issues: <a href="https://github.com/JirakJ/run-config-drift-detector">GitHub</a></li>
+  <li>Email: support@jakubjirak.com</li>
+</ul>
+    ]]></description>
 
     <depends>com.intellij.modules.platform</depends>
     <depends optional="true" config-file="git4idea-extensions.xml">Git4Idea</depends>
@@ -79,4 +100,19 @@
             <add-to-group group-id="ToolsMenu" anchor="last"/>
         </action>
     </actions>
+
+    <change-notes><![CDATA[
+        <h3>What's New</h3>
+        <ul>
+            <li><b>Environment Manifest</b> - Define expected JDK, env vars, tools, and ports in a .run-requirements.yaml file</li>
+            <li><b>Health Check Dashboard</b> - Visual drift report with pass, fail, and warning status for each requirement</li>
+            <li><b>JDK Validation</b> - Verify that JDK version and vendor match your project requirements</li>
+            <li><b>Environment Variable Checks</b> - Ensure required environment variables are present with correct values</li>
+            <li><b>Port Conflict Detection</b> - Detect ports already in use before running your application</li>
+            <li><b>Quick-Fix Suggestions</b> - One-click corrections for every detected drift issue</li>
+            <li><b>Auto-Scan on Startup</b> - Automatically validate environment requirements when the project opens</li>
+            <li><b>Team Config Sync</b> - Share and synchronize run configurations across your team</li>
+            <li><b>Auto-Generate Manifest</b> - Generate .run-requirements.yaml from your existing run configurations</li>
+        </ul>
+    ]]></change-notes>
 </idea-plugin>
