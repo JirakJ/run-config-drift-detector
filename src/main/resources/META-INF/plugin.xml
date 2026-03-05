@@ -4,8 +4,7 @@
     <name>Run Config Drift Detector</name>
     <vendor email="support@jakubjirak.com" url="https://github.com/jakubjirak">Jakub Jirák</vendor>
 
-    <description><![CDATA[
-<h2>Run Config Drift Detector — Eliminate "Works on My Machine"</h2>
+    <description><![CDATA[<h2>Run Config Drift Detector — Eliminate "Works on My Machine"</h2>
 
 <p>
   Run Config Drift Detector compares your IDE run configurations against a
@@ -37,13 +36,6 @@
   <li><b>Common Issues Dashboard</b> — See the most frequent drift issues across the team</li>
 </ul>
 
-<h3>Pricing</h3>
-<ul>
-  <li><b>Free</b> — Full drift detection (up to 10 requirements), health reports, quick fixes</li>
-  <li><b>Pro ($2.90/month or $29/year)</b> — Unlimited requirements, auto-generate manifest, onboarding mode</li>
-  <li><b>Team ($5.90/user/month)</b> — All Pro features + team sync, common issues dashboard, .env.example sync</li>
-</ul>
-
 <h3>Requirements</h3>
 <ul>
   <li>IntelliJ IDEA, PyCharm, WebStorm, or compatible JetBrains IDE (2024.1+)</li>
@@ -54,8 +46,7 @@
 <ul>
   <li>Issues: <a href="https://github.com/JirakJ/run-config-drift-detector">GitHub</a></li>
   <li>Email: support@jakubjirak.com</li>
-</ul>
-    ]]></description>
+</ul>]]></description>
 
     <depends>com.intellij.modules.platform</depends>
     <depends optional="true" config-file="git4idea-extensions.xml">Git4Idea</depends>
@@ -89,6 +80,9 @@
         <!-- Startup activity -->
         <projectActivity
                 implementation="com.jakubjirak.runconfigdrift.DriftDetectorStartupActivity"/>
+    
+        <notificationGroup id="Run Config Drift Detector Feedback" displayType="BALLOON"/>
+        <projectActivity implementation="com.jakubjirak.runconfigdrift.feedback.FeedbackNotifier"/>
     </extensions>
 
     <actions>
