@@ -8,7 +8,6 @@
 
 ## ✨ Features
 
-### Free Tier
 - **Environment manifest** — declare project requirements in `.run-requirements.yaml` (JDK, env vars, tools, ports)
 - **Health check dashboard** — see all drift issues at a glance with ✅/❌/⚠️ status indicators and a health score
 - **JDK validation** — checks project SDK version and vendor against requirements
@@ -18,16 +17,10 @@
 - **Fix suggestions** — actionable quick-fix recommendations for each drift issue (set env var, download JDK, kill process on port)
 - **Auto-scan on startup** — automatically validates environment when the project opens
 - **Manual re-scan** via **Tools → Re-scan for Drift**
-- **Up to 10 requirements** per manifest
-
-### Pro Tier ($2.90/month or $29/year)
-- **Unlimited requirements**
+- **Unlimited requirements** per manifest
 - **Onboarding mode** — step-by-step setup guide with progress tracker
 - **Auto-generate manifest** from existing run configurations
 - **README.md integration** for onboarding
-
-### Team Tier ($5.90/user/month)
-- All Pro features
 - **Team sync** — compare environment state between team members
 - **Common issues dashboard**
 - **Auto-sync `.env.example`** files
