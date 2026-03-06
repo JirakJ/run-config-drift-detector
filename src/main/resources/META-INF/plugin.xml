@@ -1,6 +1,6 @@
 <idea-plugin>
     <id>com.jakubjirak.runconfigdrift</id>
-    <product-descriptor code="PRUNCONFIGDRIFT" release-date="20260215" release-version="20262" optional="true"/>
+
     <name>Run Config Drift Detector</name>
     <vendor email="support@jakubjirak.com" url="https://github.com/jakubjirak">Jakub Jirák</vendor>
 
@@ -28,7 +28,7 @@
   <li><b>Manual Re-Scan</b> — Trigger a scan anytime from the Tools menu</li>
 </ul>
 
-<h3>Team Features (Pro/Team)</h3>
+<h3>Team Features</h3>
 <ul>
   <li><b>Auto-Generate Manifest</b> — Create .run-requirements.yaml from existing run configurations</li>
   <li><b>Team Config Sync</b> — Share and synchronize run configurations across your team</li>

@@ -41,13 +41,13 @@
 - Auto-scan on project open with startup activity
 - Manual re-scan action via Tools menu
 - Configurable settings: enable/disable detection, requirements file path, auto-scan toggle
-- Auto-generate manifest from existing run configurations (Pro)
-- Onboarding mode with step-by-step setup guide and progress tracker (Pro)
-- Unlimited requirements (Pro)
-- README.md integration for onboarding (Pro)
-- Team sync for comparing environment state between team members (Team)
-- Common issues dashboard (Team)
-- Auto-sync `.env.example` files (Team)
+- Auto-generate manifest from existing run configurations
+- Onboarding mode with step-by-step setup guide and progress tracker
+- Unlimited requirements
+- README.md integration for onboarding
+- Team sync for comparing environment state between team members
+- Common issues dashboard
+- Auto-sync `.env.example` files
 - VCS-friendly manifest designed for version control
 - Run configuration diff between VCS and local state
 - Balloon notification support
