@@ -3,6 +3,8 @@
 
     <name>Run Config Drift Detector</name>
     <vendor email="support@jakubjirak.com" url="https://github.com/jakubjirak">Jakub Jirák</vendor>
+    <product-descriptor code="PRUNCONFIGDRIFT" release-date="20260417" release-version="20263" optional="true"/>
+
 
     <description><![CDATA[<h2>Run Config Drift Detector — Eliminate "Works on My Machine"</h2>
 
