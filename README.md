@@ -1,8 +1,10 @@
 # Run Config Drift Detector
 
 [![Build](https://github.com/JirakJ/run-config-drift-detector/actions/workflows/build.yml/badge.svg)](https://github.com/JirakJ/run-config-drift-detector/actions/workflows/build.yml)
-[![Version](https://img.shields.io/badge/version-2026.2.2-blue.svg)](https://github.com/JirakJ/run-config-drift-detector/releases)
-[![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+[![Version](https://img.shields.io/badge/version-2026.8.0-blue.svg)](https://github.com/JirakJ/run-config-drift-detector/releases)
+[![License](https://img.shields.io/badge/license-Apache--2.0-blue)](LICENSE)
+
+> **Free & open source** — every feature is unlocked for everyone, no license needed. Licensed under [Apache-2.0](LICENSE).
 
 > Eliminates "Works on My Machine" — validate environment requirements before you hit Run
 
@@ -110,9 +112,13 @@ cd run-config-drift-detector
 ./gradlew build
 ```
 
-## 📝 License
+## License
 
-MIT License — see [LICENSE](LICENSE)
+Apache License 2.0 — see [LICENSE](LICENSE) and [NOTICE](NOTICE). Copyright 2026 Jakub Jirák.
+
+## Contributing
+
+Issues and pull requests are welcome at https://github.com/JirakJ/run-config-drift-detector.
 
 ## 👤 Author
 

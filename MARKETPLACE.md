@@ -33,38 +33,16 @@ and validating every developer's setup against it automatically.</p>
     <li><b>Quick-Fix Suggestions</b> — one-click actions to set env vars, download the correct JDK, or kill a process occupying a port</li>
     <li><b>Auto-Scan on Startup</b> — validates your environment every time you open the project</li>
     <li><b>Manual Re-scan</b> — trigger a check anytime via Tools → Re-scan for Drift</li>
-    <li><b>Onboarding Mode (Pro)</b> — step-by-step setup guide with a progress tracker for new team members</li>
-    <li><b>Auto-Generate Manifest (Pro)</b> — create <code>.run-requirements.yaml</code> from existing run configurations</li>
-    <li><b>README Integration (Pro)</b> — keep your README in sync with environment requirements</li>
+    <li><b>Onboarding Mode</b> — step-by-step setup guide with a progress tracker for new team members</li>
+    <li><b>Auto-Generate Manifest</b> — create <code>.run-requirements.yaml</code> from existing run configurations</li>
+    <li><b>README Integration</b> — keep your README in sync with environment requirements</li>
     <li><b>Team Sync (Team)</b> — anonymized environment comparison across team members</li>
     <li><b>Common Issues Dashboard (Team)</b> — see which setup problems hit your team most often</li>
     <li><b>Auto-Sync .env.example (Team)</b> — keep <code>.env.example</code> files up to date automatically</li>
 </ul>
 
-<h3>Free Tier</h3>
-<ul>
-    <li>Full environment manifest support (up to 10 requirements)</li>
-    <li>Health check dashboard with status indicators</li>
-    <li>JDK, env var, working directory, and port validation</li>
-    <li>Quick-fix suggestions</li>
-    <li>Auto-scan on project open</li>
-</ul>
-
-<h3>Pro Tier ($2.90/month)</h3>
-<ul>
-    <li>Unlimited requirements per manifest</li>
-    <li>Onboarding mode with step-by-step progress tracking</li>
-    <li>Auto-generate manifest from run configurations</li>
-    <li>README.md integration</li>
-</ul>
-
-<h3>Team Tier ($5.90/user/month)</h3>
-<ul>
-    <li>All Pro features</li>
-    <li>Team sync — anonymized environment comparison</li>
-    <li>Common issues dashboard</li>
-    <li>Auto-sync <code>.env.example</code> files</li>
-</ul>
+<h3>Free &amp; Open Source</h3>
+<p>Every feature is free for everyone — no license, no limits. The source code is available under the Apache-2.0 license at <a href="https://github.com/JirakJ/run-config-drift-detector">github.com/JirakJ/run-config-drift-detector</a>. Issues and pull requests are welcome.</p>
 
 <h3>Getting Started</h3>
 <ol>
@@ -91,16 +69,12 @@ Build & DevOps
 
 ## Pricing
 
-| Tier | Price | Features |
-|------|-------|----------|
-| Free | $0 | Manifest support (10 requirements), health dashboard, JDK/env var/port/working dir validation, quick-fixes, auto-scan |
-| Pro | $2.90/month or $29/year | Unlimited requirements, onboarding mode, auto-generate manifest, README integration |
-| Team | $5.90/user/month | All Pro + team sync, common issues dashboard, auto-sync .env.example |
+Free & open source (Apache-2.0) — every feature is available to everyone, no license needed.
 
 ## Screenshots Needed
 
 1. **Health Check Dashboard** — the Drift Report tool window showing ✅/❌/⚠️ status indicators and overall health score
 2. **Manifest File** — `.run-requirements.yaml` with syntax highlighting showing JDK, env vars, tools, and ports
 3. **Quick-Fix in Action** — editor popup offering to set a missing environment variable or download JDK
-4. **Onboarding Mode (Pro)** — step-by-step progress tracker guiding a new developer through setup
+4. **Onboarding Mode** — step-by-step progress tracker guiding a new developer through setup
 5. **Port Conflict Detection** — notification showing a port conflict with a "Kill Process" quick-fix

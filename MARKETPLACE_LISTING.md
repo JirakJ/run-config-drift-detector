@@ -32,7 +32,7 @@
 
 ### ✨ Key Features
 
-#### 🆓 Free Tier
+#### ✨ Features (all free)
 
 - 📋 **Environment Manifest** — Declare project requirements in `.run-requirements.yaml` (JDK, env vars, tools, ports)
 - 📊 **Health Check Dashboard** — See all drift issues at a glance with ✅/❌/⚠️ status indicators and a health score
@@ -43,31 +43,15 @@
 - 🔧 **Fix Suggestions** — Actionable quick-fix recommendations (set env var, download JDK, kill process on port)
 - 🔄 **Auto-scan on Startup** — Automatically validates environment when the project opens
 - 🛠️ **Manual Re-scan** — Via **Tools → Re-scan for Drift**
-- 📏 **Up to 10 Requirements** per manifest
-
-#### ⭐ Pro Tier — $2.90/month or $29/year
-
-- ♾️ **Unlimited Requirements** — No cap on manifest entries
 - 📖 **Onboarding Mode** — Step-by-step setup guide with progress tracker for new team members
 - ⚙️ **Auto-generate Manifest** — Create `.run-requirements.yaml` from existing run configurations
 - 📄 **README.md Integration** — Embed onboarding status in project README
-
-#### 👥 Team Tier — $5.90/user/month
-
-- 🔄 **Team Sync** — Compare environment state between team members
-- 📊 **Common Issues Dashboard** — Track recurring environment problems across the team
-- 📁 **Auto-sync `.env.example`** — Keep example environment files in sync automatically
-- *All Pro features included*
 
 ---
 
 ### 💰 Pricing Model
 
-| Tier     | Price              | Highlights                                          |
-|----------|--------------------|------------------------------------------------------|
-| **Free** | $0                 | Manifest, dashboard, JDK/env/port validation (10 max) |
-| **Pro**  | $2.90/mo · $29/yr  | Unlimited requirements, onboarding mode, auto-generate |
-| **Team** | $5.90/user/mo      | Team sync, common issues dashboard, `.env.example` sync |
+Free & open source (Apache-2.0) — every feature is available to everyone, no license needed.
 
 ---
 
@@ -109,8 +93,8 @@
 4. **JDK Validation** — SDK version and vendor mismatch detection with download link
 5. **Port Conflict** — Port availability check showing occupied ports and the processes using them
 6. **Settings Panel** — Plugin configuration page under Settings → Tools
-7. **Onboarding Mode (Pro)** — Step-by-step environment setup wizard with progress tracker
-8. **Auto-generate Manifest (Pro)** — One-click manifest creation from existing run configurations
+7. **Onboarding Mode** — Step-by-step environment setup wizard with progress tracker
+8. **Auto-generate Manifest** — One-click manifest creation from existing run configurations
 
 ---
 
@@ -165,12 +149,10 @@
 - [ ] Screenshots (1280×800 minimum) captured for all key features
 - [ ] Short description within 255-character limit
 - [ ] Full description reviewed and proofread
-- [ ] Pricing tiers configured in JetBrains Marketplace portal
 - [ ] Product descriptor code `PRUNCONFIGDRIFT` verified
 - [ ] Plugin signed with JetBrains Marketplace certificate
 - [ ] License agreement (EULA) uploaded
 - [ ] CHANGELOG.md up to date with latest version notes
 - [ ] Compatibility tested on minimum build (232)
-- [ ] Free / Pro / Team feature gating verified
 - [ ] `.run-requirements.yaml` schema documented
 - [ ] Support email monitored and responsive
