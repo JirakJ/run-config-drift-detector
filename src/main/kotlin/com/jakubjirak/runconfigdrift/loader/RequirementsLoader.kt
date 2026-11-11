@@ -1,6 +1,7 @@
 package com.jakubjirak.runconfigdrift.loader
 
 import com.jakubjirak.runconfigdrift.model.RunRequirements
+import com.jakubjirak.runconfigdrift.settings.DriftDetectorSettings
 import com.intellij.openapi.diagnostic.Logger
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.vfs.VirtualFile
@@ -16,8 +17,7 @@ object RequirementsLoader {
     const val DEFAULT_FILENAME = ".run-requirements.yaml"
 
     fun loadFromProject(project: Project): RunRequirements? {
-        val baseDir = project.basePath ?: return null
-        val specFile = File(baseDir, DEFAULT_FILENAME)
+        val specFile = specFileFor(project) ?: return null
         if (!specFile.exists()) {
             LOG.info("No requirements file found at: ${specFile.absolutePath}")
             return null
@@ -26,10 +26,23 @@ object RequirementsLoader {
     }
 
     fun findSpecFile(project: Project): VirtualFile? {
-        val baseDir = project.basePath ?: return null
-        val specFile = File(baseDir, DEFAULT_FILENAME)
+        val specFile = specFileFor(project) ?: return null
         if (!specFile.exists()) return null
         return com.intellij.openapi.vfs.LocalFileSystem.getInstance().findFileByIoFile(specFile)
+    }
+
+    private fun specFileFor(project: Project): File? {
+        val baseDir = project.basePath ?: return null
+        return resolveSpecFile(baseDir, DriftDetectorSettings.getInstance().specFilePath)
+    }
+
+    /**
+     * Resolves the configured requirements file: relative paths are resolved against the project root,
+     * absolute paths are used as-is and a blank setting falls back to [DEFAULT_FILENAME].
+     */
+    fun resolveSpecFile(projectBasePath: String, configuredPath: String): File {
+        val configured = File(configuredPath.trim().ifEmpty { DEFAULT_FILENAME })
+        return if (configured.isAbsolute) configured else File(projectBasePath, configured.path)
     }
 
     fun parseFile(file: File): RunRequirements? {

@@ -159,4 +159,25 @@ class RequirementsLoaderTest {
         assertNotNull(requirements)
         assertEquals("backend/app", requirements!!.workingDir)
     }
+
+    @Test
+    fun `resolveSpecFile handles relative absolute and blank settings`() {
+        val base = File("/work/proj")
+        assertEquals(File(base, ".run-requirements.yaml"), RequirementsLoader.resolveSpecFile(base.path, ".run-requirements.yaml"))
+        assertEquals(File(base, "config/req.yaml"), RequirementsLoader.resolveSpecFile(base.path, " config/req.yaml "))
+        assertEquals(File(base, ".run-requirements.yaml"), RequirementsLoader.resolveSpecFile(base.path, ""))
+        val absolute = File("/etc/team/req.yaml").absoluteFile
+        assertEquals(absolute, RequirementsLoader.resolveSpecFile(base.path, absolute.path))
+    }
+
+    @Test
+    fun `ports accept ints and numeric strings and skip junk`() {
+        val req = RequirementsLoader.parseYaml("ports: [8080, \"9090\", abc, null]")!!
+        assertEquals(listOf(8080, 9090), req.ports)
+    }
+
+    @Test
+    fun `non-map yaml document is rejected`() {
+        assertEquals(null, RequirementsLoader.parseYaml("- just\n- a list"))
+    }
 }

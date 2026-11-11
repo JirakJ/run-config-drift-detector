@@ -1,6 +1,6 @@
 # Run Config Drift Detector
 
-[![Build](https://github.com/JirakJ/run-config-drift-detector/actions/workflows/build.yml/badge.svg)](https://github.com/JirakJ/run-config-drift-detector/actions/workflows/build.yml)
+[![Build](https://github.com/JirakJ/run-config-drift-detector/actions/workflows/verify.yml/badge.svg)](https://github.com/JirakJ/run-config-drift-detector/actions/workflows/verify.yml)
 [![Version](https://img.shields.io/badge/version-2026.8.0-blue.svg)](https://github.com/JirakJ/run-config-drift-detector/releases)
 [![License](https://img.shields.io/badge/license-Apache--2.0-blue)](LICENSE)
 
@@ -10,22 +10,12 @@
 
 ## ✨ Features
 
-- **Environment manifest** — declare project requirements in `.run-requirements.yaml` (JDK, env vars, tools, ports)
-- **Health check dashboard** — see all drift issues at a glance with ✅/❌/⚠️ status indicators and a health score
-- **JDK validation** — checks project SDK version and vendor against requirements
-- **Environment variable check** — verifies required env vars are set in run configurations
-- **Working directory validation** — ensures the correct working directory is configured
-- **Port conflict detection** — checks for port availability before running
-- **Fix suggestions** — actionable quick-fix recommendations for each drift issue (set env var, download JDK, kill process on port)
-- **Auto-scan on startup** — automatically validates environment when the project opens
-- **Manual re-scan** via **Tools → Re-scan for Drift**
-- **Unlimited requirements** per manifest
-- **Onboarding mode** — step-by-step setup guide with progress tracker
-- **Auto-generate manifest** from existing run configurations
-- **README.md integration** for onboarding
-- **Team sync** — compare environment state between team members
-- **Common issues dashboard**
-- **Auto-sync `.env.example`** files
+- **Requirements manifest** — declare the required JDK version, environment variables and working directory in `.run-requirements.yaml`
+- **JDK check** — compares the project SDK's major version with the required one (also flags a missing SDK)
+- **Environment variable check** — reports required variables missing from the environment the IDE runs with
+- **Working directory check** — verifies the directory exists and is a directory
+- **Drift Report tool window** — every issue with a ❌/⚠️ icon, a fix suggestion and an overall health score (errors −25, warnings −10)
+- **Auto-scan on project open** with a notification when drift is found, plus manual **Tools → Re-scan for Drift**
 
 ## 📦 Installation
 
@@ -43,26 +33,14 @@
 
 1. Create a `.run-requirements.yaml` file in your project root:
    ```yaml
-   jdk:
-     version: "17"
-     vendor: "temurin"    # optional
-   env:
-     - name: DATABASE_URL
-       required: true
-       description: "PostgreSQL connection string"
-     - name: API_KEY
-       required: false
-   tools:
-     - name: docker
-       version: "20+"
-     - name: node
-       version: "18+"
-   ports:
-     - 8080
-     - 5432
+   jdk: 17                 # major version of the project SDK
+   env_vars:               # must be set in the environment the IDE was started with
+     - DATABASE_URL
+     - API_KEY
+   working_dir: backend    # relative to the project root, or absolute
    ```
-2. Open the project — the plugin auto-scans and shows results in the **Drift Report** tool window
-3. Click on any ❌ issue to see the fix suggestion and apply the quick-fix
+2. Open the project — the plugin scans on startup and shows results in the **Drift Report** tool window
+3. Fix the reported issues and click **Re-scan** (or **Tools → Re-scan for Drift**)
 
 ## ⚙️ Configuration
 
@@ -71,29 +49,17 @@
 | Setting | Default | Description |
 |---------|---------|-------------|
 | Enable drift detection | `true` | Master toggle for drift detection |
-| Requirements file path | `.run-requirements.yaml` | Path to the requirements manifest file |
-| Auto-scan on project open | `true` | Automatically run drift detection when the project opens |
+| Requirements file path | `.run-requirements.yaml` | Manifest location, relative to the project root or absolute |
+| Auto-scan on project open | `true` | Run drift detection when the project opens |
 
 ## 🎯 Usage
 
-### Health Check Dashboard
-Open **View → Tool Windows → Drift Report** to see the health check results. Each requirement shows:
-- ✅ **OK** — requirement is satisfied
-- ❌ **MISSING** — requirement is not met
-- ⚠️ **WARNING** — potential issue detected
-- 🔴 **INCOMPATIBLE** — version mismatch or conflict
+### Drift Report
+Open **View → Tool Windows → Drift Report**. Each issue shows its severity (❌ error, ⚠️ warning), a description and a
+fix suggestion; the header shows the health score (100 minus 25 per error and 10 per warning) and the scan time.
 
-### Quick Fixes
-Click on any failed check to see actionable suggestions:
-- **Set environment variable** — opens run configuration editor
-- **Download JDK** — triggers JDK download via IDE
-- **Kill process on port** — frees up the required port
-
-### Manual Re-scan
-Go to **Tools → Re-scan for Drift** to manually re-run drift detection after making changes to your environment.
-
-### VCS Integration
-The `.run-requirements.yaml` manifest is designed to be committed to version control, ensuring all team members share the same environment requirements.
+### Manifest in version control
+Commit `.run-requirements.yaml` so every team member is checked against the same requirements.
 
 ## 🔌 Keyboard Shortcuts
 
@@ -101,8 +67,7 @@ No default keyboard shortcuts are assigned. You can configure a custom shortcut 
 
 ## 📋 Requirements
 
-- IntelliJ IDEA 2024.3+ (build 243+)
-- Java 17+
+- IntelliJ IDEA 2023.2+ (or another IntelliJ-based IDE, build 232+)
 
 ## 🏗️ Building from Source
 
