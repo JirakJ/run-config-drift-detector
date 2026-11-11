@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+## [2026.9.0] - 2026-11-11
+
 ### Fixed
 - The "Requirements file path" setting was ignored — the plugin always read `.run-requirements.yaml` from the project root. Relative (to the project root) and absolute paths are now honoured.
 - A required environment variable listed twice was reported twice.
