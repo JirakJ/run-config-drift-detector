@@ -22,3 +22,7 @@ Thumbs.db
 
 # IntelliJ Platform cache
 .intellijPlatform/
+
+# Local-only artefacts and secrets
+.kotlin/
+.env
