@@ -4,7 +4,6 @@ import com.jakubjirak.runconfigdrift.model.DriftIssue
 import com.jakubjirak.runconfigdrift.model.DriftSeverity
 import com.jakubjirak.runconfigdrift.model.DriftType
 import com.jakubjirak.runconfigdrift.model.RunRequirements
-import com.intellij.openapi.diagnostic.Logger
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.roots.ProjectRootManager
 
@@ -15,44 +14,39 @@ class JdkAnalyzer : DriftAnalyzer {
 
     override fun analyze(project: Project, requirements: RunRequirements): List<DriftIssue> {
         val requiredJdk = requirements.jdk ?: return emptyList()
+        val projectSdk = ProjectRootManager.getInstance(project).projectSdk
+        return check(requiredJdk, sdkConfigured = projectSdk != null, versionString = projectSdk?.versionString)
+    }
 
-        return try {
-            val projectSdk = ProjectRootManager.getInstance(project).projectSdk
-            if (projectSdk == null) {
+    companion object {
+        private val VERSION_PATTERN = Regex("""(\d+)(?:\.\d+)*""")
+
+        /**
+         * Compares the project SDK against [requiredJdk]. An unparseable version string is not reported
+         * (it may be a non-Java SDK name), a missing SDK is.
+         */
+        fun check(requiredJdk: Int, sdkConfigured: Boolean, versionString: String?): List<DriftIssue> {
+            if (!sdkConfigured) {
                 return listOf(
                     DriftIssue(
                         type = DriftType.JDK_MISMATCH,
                         severity = DriftSeverity.ERROR,
                         description = "No project SDK configured. Required: JDK $requiredJdk",
                         fixSuggestion = "Configure a JDK $requiredJdk in Project Structure > SDKs",
-                    )
+                    ),
                 )
             }
-
-            val versionString = projectSdk.versionString ?: ""
-            val detectedVersion = extractMajorVersion(versionString)
-
-            if (detectedVersion != null && detectedVersion != requiredJdk) {
-                listOf(
-                    DriftIssue(
-                        type = DriftType.JDK_MISMATCH,
-                        severity = DriftSeverity.ERROR,
-                        description = "JDK version mismatch: required $requiredJdk, found $detectedVersion ($versionString)",
-                        fixSuggestion = "Change project SDK to JDK $requiredJdk in Project Structure > SDKs",
-                    )
-                )
-            } else {
-                emptyList()
-            }
-        } catch (e: Exception) {
-            LOG.warn("Failed to analyze JDK version", e)
-            emptyList()
+            val detected = extractMajorVersion(versionString.orEmpty())
+            if (detected == null || detected == requiredJdk) return emptyList()
+            return listOf(
+                DriftIssue(
+                    type = DriftType.JDK_MISMATCH,
+                    severity = DriftSeverity.ERROR,
+                    description = "JDK version mismatch: required $requiredJdk, found $detected ($versionString)",
+                    fixSuggestion = "Change project SDK to JDK $requiredJdk in Project Structure > SDKs",
+                ),
+            )
         }
-    }
-
-    companion object {
-        private val LOG = Logger.getInstance(JdkAnalyzer::class.java)
-        private val VERSION_PATTERN = Regex("""(\d+)(?:\.\d+)*""")
 
         fun extractMajorVersion(versionString: String): Int? {
             val match = VERSION_PATTERN.find(versionString) ?: return null

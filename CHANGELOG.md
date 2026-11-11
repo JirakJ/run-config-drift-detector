@@ -1,5 +1,15 @@
 # Changelog
 
+## [Unreleased]
+
+### Fixed
+- The "Requirements file path" setting was ignored — the plugin always read `.run-requirements.yaml` from the project root. Relative (to the project root) and absolute paths are now honoured.
+- A required environment variable listed twice was reported twice.
+
+### Removed
+- Unused team-sync / branch-config / config-versioning classes and the empty optional Git integration.
+- Documentation of features that do not exist (port conflict detection, JDK vendor checks, tools, quick fixes, onboarding mode, manifest generation, team sync). The README example manifest now uses the format the plugin actually reads (`jdk`, `env_vars`, `working_dir`).
+
 ## [2026.8.0] - 2026-11-10
 
 ### Changed
